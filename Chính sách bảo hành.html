@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cửa hàng Đồng Hồ Cao Cấp</title>
+  <style>
+    :root {
+      --main-bg-color: #000000;   /* Màu nền chủ đạo (đen) */
+      --gold-color: #d4af37;      /* Màu vàng kim */
+      --text-color: #ffffff;      /* Màu chữ trắng */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--main-bg-color);
+      color: var(--text-color);
+      margin-left: 220px;   /* Tạo khoảng trống cho cột quảng cáo bên trái */
+      padding-top: 80px;    /* Tạo khoảng trống phía trên cho phần header cố định */
+    }
+
+    /* Cột quảng cáo bên trái */
+    .left-ad {
+      width: 200px;
+      background-color: #1c1c1c;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      border-right: 2px solid var(--gold-color);
+    }
+
+    .left-ad h2 {
+      color: var(--gold-color);
+      margin-bottom: 10px;
+    }
+
+    .left-ad p {
+      margin-bottom: 15px;
+    }
+
+    /* Header (chứa logo và menu) */
+    header {
+      position: fixed;
+      top: 0;
+      left: 220px;              /* Canh phải so với cột quảng cáo  */
+      right: 0;
+      display: flex;
+      align-items: center;
+      background-color: var(--main-bg-color);
+      border-bottom: 2px solid var(--gold-color);
+      z-index: 999;
+      padding: 10px 20px;
+    }
+
+    /* Logo */
+    .logo {
+      margin-right: 40px;
+    }
+
+    .logo img {
+      height: 50px; /* Chiều cao logo */
+      width: auto;
+    }
+
+    /* Thanh menu */
+    nav.menu {
+      flex: 1;  /* Để menu dàn đều ngang */
+    }
+
+    .menu ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center; 
+      align-items: center; 
+      gap: 20px; 
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu ul li {
+      position: relative; /* Dùng cho dropdown */
+    }
+
+    .menu ul li a {
+      color: var(--gold-color);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      transition: background-color 0.3s;
+      display: block; /* Cho phép cả khối a được hover */
+    }
+
+    /* Hiệu ứng hover trên item menu */
+    .menu ul li a:hover {
+      background-color: var(--gold-color);
+      color: var(--main-bg-color);
+      border-radius: 4px;
+    }
+
+    /* Menu con (dropdown) */
+    .menu ul li ul {
+      display: none;
+      position: absolute; 
+      top: 100%; 
+      left: 0; 
+      background-color: var(--main-bg-color);
+      border: 1px solid var(--gold-color);
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      min-width: 150px; /* Độ rộng tối thiểu cho menu con */
+    }
+
+    .menu ul li ul li a {
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--gold-color);
+    }
+
+    .menu ul li ul li a:last-child {
+      border-bottom: none;
+    }
+
+    /* Hiển thị menu con khi hover vào menu cha */
+    .menu ul li:hover > ul {
+      display: block;
+    }
+
+    /* Nội dung chính */
+    .content {
+      padding: 20px;
+    }
+
+    .content h1 {
+      margin-bottom: 20px;
+    }
+
+    /* Trang trí khung sản phẩm đồng hồ */
+    .product-card {
+      background-color: #111111;
+      border: 1px solid var(--gold-color);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .product-card img {
+      width: 250px;
+      height: auto;
+      border-right: 1px solid var(--gold-color);
+      border-radius: 8px 0 0 8px;
+    }
+
+    .product-info {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .product-info h3 {
+      color: var(--gold-color);
+      margin-bottom: 10px;
+    }
+
+    .product-info p {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    /* Nút Thêm vào giỏ */
+    .buy-btn {
+      padding: 10px 20px;
+      background-color: var(--gold-color);
+      color: var(--main-bg-color);
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .buy-btn:hover {
+      background-color: #e0c176; /* Màu vàng nhạt hơn khi hover */
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      border-top: 2px solid var(--gold-color);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cột Quảng cáo bên trái -->
+  <div class="left-ad">
+    <h2>Khuyến Mãi</h2>
+    <p>Giảm giá sốc 10% - 20% tất cả các mẫu mới</p>
+    <p>Miễn phí vận chuyển toàn quốc</p>
+    <hr style="border: 1px solid var(--gold-color); margin: 20px 0;" />
+    <h2>Quảng Cáo</h2>
+    <p>Đăng ký ngay để nhận thêm Voucher giảm giá</p>
+    <p>Liên hệ Hotline: 1800-1516</p>
+  </div>
+
+  <!-- Header chứa logo + menu -->
+  <header>
+    <!-- Logo thương hiệu -->
+    <div class="logo">
+      <img src="logo.png" alt="Thương hiệu đồng hồ" />
+    </div>
+    <!-- Menu chính -->
+    <nav class="menu">
+      <ul>
+        <li><a href="Trangchu.html">Trang chủ</a></li>
+        <li>
+          <a href="#">Sản phẩm</a>
+          <ul>
+            <li><a href="ROLEX.html">Rolex</a></li>
+            <li><a href="PATEK.html">Patek Philippe</a></li>
+            <li><a href="CARTIER.html">Cartier</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Chính sách</a>
+          <ul>
+            <li><a href="Chính sách bảo hành.html">Chính sách bảo hành</a></li>
+            <li><a href="Chính sách đổi trả.html">Chính sách đổi trả</a></li>
+            <li><a href="Chính sách trả góp.html">Chính sách trả góp</a></li>
+          </ul>
+        </li>
+        <li><a href="Về chúng tôi.html">Về chúng tôi</a></li>
+        <li><a href="Donhang.html">Giỏ hàng</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Khu vực nội dung chính -->
+  <div class="content">
+    <h1>Chính Sách Bảo Hành Tại SmingShop</h1>
+    <p>
+        Tại <strong> SmingShop</strong>, chúng tôi luôn cam kết mang đến cho khách hàng sự hài lòng tối đa trong quá trình mua sắm cũng như sử dụng sản phẩm. Bên cạnh việc cung cấp các mẫu đồng hồ chính hãng từ những thương hiệu danh tiếng như Rolex, Patek Philippe và Cartier, chúng tôi cũng chú trọng xây dựng và duy trì chế độ bảo hành chuyên nghiệp, minh bạch. Dưới đây là chi tiết về các chính sách bảo hành mà <strong> SmingShop</strong> áp dụng cho từng dòng sản phẩm, nhằm đảm bảo quyền lợi và sự an tâm của quý khách.
+    </p>
+
+    <h2>1. Thời Hạn Bảo Hành</h2>
+    <p>
+        <strong> SmingShop</strong> cung cấp thời hạn bảo hành cho tất cả đồng hồ chính hãng do chúng tôi phân phối, cụ thể:
+    </p>
+    <ul>
+        <li>
+            <strong>Đồng Hồ Rolex:</strong> Thời hạn bảo hành tối thiểu 5 năm kể từ ngày mua, phụ thuộc vào chính sách bảo hành quốc tế của Rolex và điều khoản nội bộ của cửa hàng.
+        </li>
+        <li>
+            <strong>Đồng Hồ Patek Philippe:</strong> Thời hạn bảo hành tối thiểu 5 năm kể từ ngày mua, áp dụng theo tiêu chuẩn hãng và chính sách hỗ trợ mở rộng từ cửa hàng.
+        </li>
+        <li>
+            <strong>Đồng Hồ Cartier:</strong> Thời hạn bảo hành tối thiểu 5 năm kể từ ngày mua, căn cứ theo quy định chính thức của Cartier và gói bảo hành bổ sung từ cửa hàng.
+        </li>
+    </ul>
+    <p>
+        Ngoài ra, quý khách có thể lựa chọn các gói bảo hành mở rộng với mức phí ưu đãi, giúp tăng cường quyền lợi và thời hạn sửa chữa, thay thế linh kiện miễn phí khi cần thiết.
+    </p>
+
+    <h2>2. Điều Kiện Áp Dụng Bảo Hành</h2>
+    <p>
+        Để được hưởng đầy đủ quyền lợi từ chính sách bảo hành của <strong> SmingShop</strong>, quý khách vui lòng lưu ý những điều kiện sau:
+    </p>
+    <ul>
+        <li>Sản phẩm phải còn trong thời hạn bảo hành và có đầy đủ <span class="highlight">thẻ bảo hành</span>, <span class="highlight">hóa đơn mua hàng</span> do cửa hàng cung cấp.</li>
+        <li>
+            Những hư hỏng hoặc lỗi phát sinh đến từ <span class="highlight">chất lượng linh kiện</span> hoặc <span class="highlight">quy trình sản xuất</span> của đồng hồ.
+        </li>
+        <li>
+            Đồng hồ được sử dụng, bảo quản và vệ sinh theo <span class="highlight">hướng dẫn</span> từ nhà sản xuất cũng như khuyến nghị của cửa hàng.
+        </li>
+        <li>
+            Quý khách chưa từng tự ý tháo lắp, can thiệp kỹ thuật hoặc sửa chữa đồng hồ tại các cơ sở không phải là <strong>Trung tâm bảo hành chính hãng</strong> hoặc địa điểm bảo hành ủy quyền của <strong>SmingShop</strong>.
+        </li>
+    </ul>
+    <p>
+        Việc tuân thủ đúng những điều kiện nêu trên giúp quá trình bảo hành được thực hiện chính xác và nhanh chóng. Chúng tôi khuyến khích quý khách luôn kiểm tra kỹ lưỡng sản phẩm khi nhận hàng, cũng như đọc kỹ hướng dẫn sử dụng và quy định bảo hành kèm theo.
+    </p>
+
+    <h2>3. Các Trường Hợp Từ Chối Bảo Hành</h2>
+    <p>
+        Mặc dù <strong> SmingShop</strong> luôn hỗ trợ khách hàng tối đa, nhưng cũng có những trường hợp chúng tôi không thể áp dụng chính sách bảo hành:
+    </p>
+    <ul>
+        <li>Đồng hồ bị hư hỏng do tai nạn, rơi vỡ hoặc va đập mạnh trong quá trình sử dụng không đúng hướng dẫn.</li>
+        <li>Đồng hồ bị ảnh hưởng do cháy nổ, thiên tai, hoặc tiếp xúc với hóa chất độc hại, môi trường khắc nghiệt vượt quá chuẩn cho phép.</li>
+        <li>Đồng hồ đã được sửa chữa, can thiệp kỹ thuật bởi tổ chức hoặc cá nhân không thuộc hệ thống bảo hành của hãng hay <strong> SmingShop</strong>.</li>
+        <li>Sản phẩm không còn tem niêm phong, dấu niêm phong bị rách nát hoặc có dấu hiệu giả mạo.</li>
+        <li>Quá hạn bảo hành do quý khách không thực hiện bảo dưỡng định kỳ hoặc để đồng hồ ngừng hoạt động quá lâu mà không có sự can thiệp kịp thời của kỹ thuật viên.</li>
+    </ul>
+    <p>
+        Trong những trường hợp trên, cửa hàng sẽ hỗ trợ kiểm tra và sửa chữa có tính phí, căn cứ theo báo giá của nhà sản xuất hoặc của trung tâm bảo hành được chỉ định.
+    </p>
+
+    <h2>4. Quy Trình Xử Lý Bảo Hành</h2>
+    <p>
+        Để đảm bảo quyền lợi chính đáng và giúp quý khách nhanh chóng giải quyết vấn đề, chúng tôi đã thiết lập quy trình bảo hành rõ ràng:
+    </p>
+    <ul>
+        <li>
+            <strong>Tiếp nhận yêu cầu:</strong> Khách hàng liên hệ với đội ngũ chăm sóc khách hàng của <strong> SmingShop</strong> qua điện thoại, email hoặc đến trực tiếp cửa hàng để thông báo về tình trạng lỗi của sản phẩm.
+        </li>
+        <li>
+            <strong>Kiểm tra sản phẩm:</strong> Nhân viên kỹ thuật tiến hành kiểm tra tổng thể đồng hồ, xác định nguyên nhân lỗi và đánh giá phạm vi bảo hành.
+        </li>
+        <li>
+            <strong>Thông báo kết quả:</strong> Sau khi kiểm tra, chúng tôi sẽ thông báo cho quý khách về tình trạng sản phẩm và phương án xử lý (sửa chữa, thay thế linh kiện hoặc đổi sản phẩm mới). Nếu lỗi nằm trong phạm vi bảo hành, toàn bộ chi phí sẽ do cửa hàng chi trả.
+        </li>
+        <li>
+            <strong>Thực hiện sửa chữa hoặc thay thế:</strong> Đội ngũ kỹ thuật viên lành nghề sẽ tiến hành sửa chữa chuyên sâu hoặc thay thế linh kiện chính hãng. Trường hợp cần gửi sản phẩm về trung tâm bảo hành của hãng, chúng tôi sẽ thông báo cụ thể về thời gian hoàn thiện.
+        </li>
+        <li>
+            <strong>Hoàn trả sản phẩm:</strong> Sau khi công việc bảo hành hoàn tất, đồng hồ sẽ được gửi lại cho khách hàng kèm theo biên bản xác nhận và tiếp tục áp dụng bảo hành theo thời hạn còn lại.
+        </li>
+    </ul>
+
+    <h2>5. Bảo Hành Mở Rộng Và Dịch Vụ Hậu Mãi</h2>
+    <p>
+        Ngoài chính sách bảo hành tiêu chuẩn, <strong> SmingShop</strong> còn cung cấp các gói bảo hành mở rộng giúp kéo dài thời hạn bảo hành cũng như nâng cấp phạm vi hỗ trợ. Khách hàng có thể tham khảo và lựa chọn tùy theo nhu cầu sử dụng và mong muốn bảo vệ sản phẩm lâu dài.
+    </p>
+    <p>
+        Bên cạnh đó, chúng tôi còn triển khai dịch vụ hậu mãi bao gồm <em>định kỳ bảo dưỡng, vệ sinh, đánh bóng</em>, giữ cho đồng hồ của bạn luôn ở trạng thái hoạt động tốt và duy trì vẻ ngoài hoàn hảo. Tất cả dịch vụ này được thực hiện bởi đội ngũ thợ kỹ thuật giàu kinh nghiệm, đảm bảo chất lượng chuyên môn và sự an tâm tuyệt đối.
+    </p>
+
+    <h2>6. Hỗ Trợ Vận Chuyển Và Kiểm Định</h2>
+    <p>
+        Đối với những khách hàng ở xa không thể đến trực tiếp cửa hàng, chúng tôi cung cấp dịch vụ nhận đồng hồ bằng hình thức giao hàng nhanh và gói bảo hiểm vận chuyển. Mọi chi phí vận chuyển cho quá trình bảo hành sẽ được <strong> SmingShop</strong> hỗ trợ một phần hoặc miễn phí hoàn toàn (tùy theo chương trình khuyến mãi và nội dung hợp đồng mua bán).
+    </p>
+    <p>
+        Đồng thời, để củng cố niềm tin từ khách hàng, chúng tôi cũng hỗ trợ giám định và kiểm tra chất lượng sản phẩm định kỳ. Nếu có bất kỳ nghi ngờ nào về xuất xứ hoặc linh kiện bên trong, quý khách có thể yêu cầu chúng tôi phối hợp với trung tâm thẩm định độc lập hoặc các chuyên gia được ủy quyền từ hãng để tiến hành kiểm định.
+    </p>
+
+    <h2>7. Cam Kết Và Định Hướng Phát Triển</h2>
+    <p>
+        <strong> SmingShop</strong> luôn nỗ lực không ngừng để mang đến những trải nghiệm mua sắm đẳng cấp, chế độ bảo hành chu đáo và dịch vụ hậu mãi chuyên nghiệp. Từ các dòng đồng hồ sang trọng, quý hiếm cho tới dịch vụ hỗ trợ tận tâm, chúng tôi mong muốn khẳng định vị thế hàng đầu trong lĩnh vực kinh doanh đồng hồ cao cấp tại Việt Nam.
+    </p>
+    <p>
+        Chính sách bảo hành tại <strong> SmingShop</strong> không chỉ là lời hứa, mà còn là một phần quan trọng trong triết lý hoạt động của chúng tôi – luôn đặt lợi ích và sự tin tưởng của khách hàng lên hàng đầu. Chúng tôi tin rằng, với sự chăm sóc kỹ lưỡng và chế độ bảo hành minh bạch, mỗi chiếc đồng hồ sẽ trở thành người bạn đồng hành đáng tin cậy, trường tồn cùng thời gian.
+    </p>
+    <p>
+        Nếu quý khách còn bất kỳ thắc mắc nào về chính sách bảo hành hoặc cần được tư vấn cụ thể hơn, vui lòng liên hệ với chúng tôi qua số điện thoại đường dây nóng hoặc tới trực tiếp cửa hàng. Đội ngũ chăm sóc khách hàng của chúng tôi luôn sẵn sàng hỗ trợ và giải đáp kịp thời.
+    </p>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Cửa hàng Đồng Hồ Cao Cấp. Mọi quyền được bảo lưu.</p>
+  </footer>
+
+</body>
+</html>

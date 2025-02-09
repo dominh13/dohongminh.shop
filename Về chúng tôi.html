@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cửa hàng Đồng Hồ Cao Cấp</title>
+  <style>
+    :root {
+      --main-bg-color: #000000;   /* Màu nền chủ đạo (đen) */
+      --gold-color: #d4af37;      /* Màu vàng kim */
+      --text-color: #ffffff;      /* Màu chữ trắng */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--main-bg-color);
+      color: var(--text-color);
+      margin-left: 220px;   /* Tạo khoảng trống cho cột quảng cáo bên trái */
+      padding-top: 80px;    /* Tạo khoảng trống phía trên cho phần header cố định */
+    }
+
+    /* Cột quảng cáo bên trái */
+    .left-ad {
+      width: 200px;
+      background-color: #1c1c1c;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      border-right: 2px solid var(--gold-color);
+    }
+
+    .left-ad h2 {
+      color: var(--gold-color);
+      margin-bottom: 10px;
+    }
+
+    .left-ad p {
+      margin-bottom: 15px;
+    }
+
+    /* Header (chứa logo và menu) */
+    header {
+      position: fixed;
+      top: 0;
+      left: 220px;              /* Canh phải so với cột quảng cáo  */
+      right: 0;
+      display: flex;
+      align-items: center;
+      background-color: var(--main-bg-color);
+      border-bottom: 2px solid var(--gold-color);
+      z-index: 999;
+      padding: 10px 20px;
+    }
+
+    /* Logo */
+    .logo {
+      margin-right: 40px;
+    }
+
+    .logo img {
+      height: 50px; /* Chiều cao logo */
+      width: auto;
+    }
+
+    /* Thanh menu */
+    nav.menu {
+      flex: 1;  /* Để menu dàn đều ngang */
+    }
+
+    .menu ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center; 
+      align-items: center; 
+      gap: 20px; 
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu ul li {
+      position: relative; /* Dùng cho dropdown */
+    }
+
+    .menu ul li a {
+      color: var(--gold-color);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      transition: background-color 0.3s;
+      display: block; /* Cho phép cả khối a được hover */
+    }
+
+    /* Hiệu ứng hover trên item menu */
+    .menu ul li a:hover {
+      background-color: var(--gold-color);
+      color: var(--main-bg-color);
+      border-radius: 4px;
+    }
+
+    /* Menu con (dropdown) */
+    .menu ul li ul {
+      display: none;
+      position: absolute; 
+      top: 100%; 
+      left: 0; 
+      background-color: var(--main-bg-color);
+      border: 1px solid var(--gold-color);
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      min-width: 150px; /* Độ rộng tối thiểu cho menu con */
+    }
+
+    .menu ul li ul li a {
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--gold-color);
+    }
+
+    .menu ul li ul li a:last-child {
+      border-bottom: none;
+    }
+
+    /* Hiển thị menu con khi hover vào menu cha */
+    .menu ul li:hover > ul {
+      display: block;
+    }
+
+    /* Nội dung chính */
+    .content {
+      padding: 20px;
+    }
+
+    .content h1 {
+      margin-bottom: 20px;
+    }
+
+    /* Trang trí khung sản phẩm đồng hồ */
+    .product-card {
+      background-color: #111111;
+      border: 1px solid var(--gold-color);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .product-card img {
+      width: 250px;
+      height: auto;
+      border-right: 1px solid var(--gold-color);
+      border-radius: 8px 0 0 8px;
+    }
+
+    .product-info {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .product-info h3 {
+      color: var(--gold-color);
+      margin-bottom: 10px;
+    }
+
+    .product-info p {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    /* Nút Thêm vào giỏ */
+    .buy-btn {
+      padding: 10px 20px;
+      background-color: var(--gold-color);
+      color: var(--main-bg-color);
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .buy-btn:hover {
+      background-color: #e0c176; /* Màu vàng nhạt hơn khi hover */
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      border-top: 2px solid var(--gold-color);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cột Quảng cáo bên trái -->
+  <div class="left-ad">
+    <h2>Khuyến Mãi</h2>
+    <p>Giảm giá sốc 10% - 20% tất cả các mẫu mới</p>
+    <p>Miễn phí vận chuyển toàn quốc</p>
+    <hr style="border: 1px solid var(--gold-color); margin: 20px 0;" />
+    <h2>Quảng Cáo</h2>
+    <p>Đăng ký ngay để nhận thêm Voucher giảm giá</p>
+    <p>Liên hệ Hotline: 1800-1516</p>
+  </div>
+
+  <!-- Header chứa logo + menu -->
+  <header>
+    <!-- Logo thương hiệu -->
+    <div class="logo">
+      <img src="logo.png" alt="Thương hiệu đồng hồ" />
+    </div>
+    <!-- Menu chính -->
+    <nav class="menu">
+      <ul>
+        <li><a href="Trangchu.html">Trang chủ</a></li>
+        <li>
+          <a href="#">Sản phẩm</a>
+          <ul>
+            <li><a href="ROLEX.html">Rolex</a></li>
+            <li><a href="PATEK.html">Patek Philippe</a></li>
+            <li><a href="CARTIER.html">Cartier</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Chính sách</a>
+          <ul>
+            <li><a href="Chính sách bảo hành.html">Chính sách bảo hành</a></li>
+            <li><a href="Chính sách đổi trả.html">Chính sách đổi trả</a></li>
+            <li><a href="Chính sách trả góp.html">Chính sách trả góp</a></li>
+          </ul>
+        </li>
+        <li><a href="Về chúng tôi.html">Về chúng tôi</a></li>
+        <li><a href="Donhang.html">Giỏ hàng</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Khu vực nội dung chính -->
+  <div class="content">
+     <h1>SmingShop – Uy tín và Chất lượng</h1>
+    <p>
+        <strong>SmingShop</strong> chính thức được thành lập vào ngày <span class="highlight">17/01/2025</span> với sứ mệnh mang đến cho khách hàng tại Việt Nam những mẫu đồng hồ đẳng cấp, chính hãng và mức giá hợp lý. Trong bối cảnh thị trường đồng hồ ngày càng đa dạng, chúng tôi mong muốn trở thành một điểm đến tin cậy, giúp các tín đồ thời gian có thể yên tâm lựa chọn những sản phẩm cao cấp đến từ các thương hiệu xa xỉ như <strong>Rolex</strong>, <strong>Patek Philippe</strong> hay <strong>Cartier</strong>. Không chỉ tập trung vào chất lượng, chúng tôi còn hướng đến việc xây dựng mối quan hệ lâu dài với khách hàng, tạo nên một cộng đồng gắn kết và chia sẻ niềm đam mê dành cho những tuyệt tác cơ khí.
+    </p>
+
+    <p>
+        Với mục tiêu khẳng định uy tín trên thị trường, <strong>SmingShop</strong> cam kết chỉ cung cấp những sản phẩm chính hãng, có đầy đủ giấy tờ chứng nhận và hộp đựng đầy đủ. Đội ngũ chuyên gia và nhân viên của chúng tôi được đào tạo bài bản, am hiểu sâu sắc về từng chi tiết kỹ thuật lẫn giá trị thương hiệu của mỗi chiếc đồng hồ. Nhờ đó, mọi thắc mắc của khách hàng đều sẽ được giải đáp một cách chi tiết và chuẩn xác nhất. Chúng tôi tin rằng, để làm hài lòng những “tín đồ thời gian”, mỗi chiếc đồng hồ không chỉ là một phụ kiện đeo tay mà còn là biểu tượng của đẳng cấp, phong cách sống và dấu ấn cá nhân.
+    </p>
+
+    <p>
+        <strong>Rolex</strong> luôn được coi là tên tuổi hàng đầu khi nhắc đến thế giới đồng hồ xa xỉ. Những thiết kế của Rolex không chỉ bền bỉ với thời gian mà còn tạo nên sự khác biệt nhờ sự kết hợp giữa nghệ thuật chế tác thủ công và công nghệ tiên tiến. Mỗi chiếc Rolex được tạo ra đều trải qua quy trình kiểm định khắt khe, đảm bảo chất lượng cũng như độ chính xác tuyệt đối. Tại <strong>SmingShop</strong>, chúng tôi tự hào mang đến cho khách hàng những mẫu Rolex đa dạng từ <em>Submariner</em>, <em>Day-Date</em> cho tới <em>GMT-Master II</em>, đáp ứng mọi nhu cầu về phong cách và cá tính.
+    </p>
+
+    <p>
+        Nhắc đến <strong>Patek Philippe</strong> là nhắc đến tinh hoa kỹ thuật và vẻ đẹp sang trọng vượt thời gian. Đây là thương hiệu mang đậm dấu ấn lịch sử với hàng loạt kiệt tác có giá trị sưu tầm bền vững. Những chiếc đồng hồ Patek Philippe không chỉ được chế tác từ vật liệu quý hiếm mà còn hội tụ những chức năng độc đáo như lịch vạn niên, tourbillon hay minute repeater. Tại <strong>SmingShop/strong>, chúng tôi hiểu rõ giá trị tinh thần cũng như giá trị kinh tế của những chiếc Patek Philippe, từ đó tư vấn cặn kẽ cho khách hàng cách chọn lựa, bảo quản và thậm chí là đầu tư lâu dài, biến mỗi chiếc Patek Philippe thành một tài sản vô giá.
+    </p>
+
+    <p>
+        Nếu như Rolex và Patek Philippe thu hút nhờ sự tinh xảo và độ bền vượt bậc, thì <strong>Cartier</strong> lại sở hữu sức hút riêng biệt nhờ phong cách thiết kế thanh lịch, lãng mạn và giàu tính nghệ thuật. Thương hiệu đến từ Pháp này chinh phục giới mộ điệu toàn cầu bằng khả năng kết hợp hài hòa giữa vẻ đẹp cổ điển và tinh thần hiện đại. Những bộ sưu tập biểu tượng như <em>Tank</em>, <em>Ballon Bleu</em> hay <em>Santos</em> luôn trở thành niềm khao khát của những người yêu thích sự sang trọng đầy tinh tế. Tại <strong>SmingShop</strong>, chúng tôi đặc biệt chú trọng đến chất lượng và nguồn gốc xuất xứ khi chọn lựa từng chiếc Cartier, để mỗi khách hàng có thể tự tin khẳng định giá trị và phong cách cá nhân.
+    </p>
+
+    <p>
+        Vấn đề giá cả của đồng hồ xa xỉ luôn là mối quan tâm hàng đầu đối với nhiều người. Chúng tôi hiểu rõ điều đó và luôn nỗ lực mang đến mức giá cạnh tranh nhất trên thị trường. Sở dĩ <strong>SmingShop</strong> có thể đảm bảo giá hợp lý là nhờ vào mối quan hệ đối tác lâu năm với những nhà phân phối và đại lý ủy quyền chính hãng. Nhờ nguồn nhập hàng ổn định và minh bạch, chúng tôi loại bỏ được chi phí phát sinh trung gian, từ đó đem lại lợi ích tối đa cho khách hàng. Hơn nữa, chúng tôi cũng thường xuyên tổ chức các chương trình khuyến mãi, ưu đãi hoặc thu cũ đổi mới, giúp bạn dễ dàng tiếp cận và sở hữu những mẫu đồng hồ mơ ước một cách thuận tiện và tiết kiệm nhất.
+    </p>
+
+    <p>
+        Ngoài ra, chế độ bảo hành và chăm sóc khách hàng cũng là một trong những yếu tố làm nên uy tín của <strong>SmingShop</strong>. Chúng tôi thiết lập đội ngũ kỹ thuật viên lành nghề để hỗ trợ kiểm tra, bảo dưỡng và sửa chữa những mẫu đồng hồ cao cấp. Bất kể sản phẩm của bạn gặp phải vấn đề gì về kỹ thuật, chúng tôi luôn sẵn sàng hỗ trợ nhanh chóng và tận tình. Chính sách trả hàng, đổi hàng cùng sự tư vấn tận tâm sẽ đảm bảo bạn luôn cảm thấy an tâm khi mua sắm tại cửa hàng. Chúng tôi không chỉ bán đồng hồ, mà còn hướng đến xây dựng một trải nghiệm mua sắm đẳng cấp và chu đáo nhất cho từng khách hàng.
+    </p>
+
+    <p>
+        Đồng hồ không chỉ để xem giờ, mà còn là món trang sức toát lên cái tôi riêng biệt, khẳng định vị thế cũng như phong cách sống của người đeo. Với triết lý kinh doanh “<em>Chất lượng đặt lên hàng đầu, uy tín tạo nên thương hiệu</em>”, <strong>SmingShop</strong> tự hào đồng hành cùng bạn trong hành trình tìm kiếm những biểu tượng thời gian đẳng cấp. Chúng tôi tin rằng, một chiếc đồng hồ xa xỉ có thể lưu giữ kỷ niệm, truyền cảm hứng và trở thành dấu ấn đáng nhớ trong cuộc đời mỗi người.
+    </p>
+
+    <p>
+        Hãy đến với <strong>SmingShop</strong> để khám phá thế giới của những tuyệt tác đồng hồ hàng đầu. Từ độ chính xác hoàn hảo đến nghệ thuật thiết kế đỉnh cao, mỗi sản phẩm nơi đây đều mang trong mình câu chuyện và giá trị vượt trội. Chúng tôi cam kết không ngừng cải thiện chất lượng dịch vụ, mở rộng danh mục sản phẩm cũng như phát triển thêm nhiều ưu đãi hấp dẫn để đáp lại sự tin tưởng từ quý khách hàng. Qua đó, chúng tôi hy vọng sẽ tiếp tục lan tỏa tình yêu dành cho những chiếc đồng hồ đỉnh cao, đồng thời khẳng định vị thế của mình như một trong những địa chỉ mua sắm đồng hồ cao cấp uy tín nhất tại Việt Nam.
+    </p>
+  <!-- Kết thúc phần nội dung -->
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Cửa hàng Đồng Hồ Cao Cấp. Mọi quyền được bảo lưu.</p>
+  </footer>
+
+</body>
+</html>

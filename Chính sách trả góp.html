@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cửa hàng Đồng Hồ Cao Cấp</title>
+  <style>
+    :root {
+      --main-bg-color: #000000;   /* Màu nền chủ đạo (đen) */
+      --gold-color: #d4af37;      /* Màu vàng kim */
+      --text-color: #ffffff;      /* Màu chữ trắng */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--main-bg-color);
+      color: var(--text-color);
+      margin-left: 220px;   /* Tạo khoảng trống cho cột quảng cáo bên trái */
+      padding-top: 80px;    /* Tạo khoảng trống phía trên cho phần header cố định */
+    }
+
+    /* Cột quảng cáo bên trái */
+    .left-ad {
+      width: 200px;
+      background-color: #1c1c1c;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      border-right: 2px solid var(--gold-color);
+    }
+
+    .left-ad h2 {
+      color: var(--gold-color);
+      margin-bottom: 10px;
+    }
+
+    .left-ad p {
+      margin-bottom: 15px;
+    }
+
+    /* Header (chứa logo và menu) */
+    header {
+      position: fixed;
+      top: 0;
+      left: 220px;              /* Canh phải so với cột quảng cáo  */
+      right: 0;
+      display: flex;
+      align-items: center;
+      background-color: var(--main-bg-color);
+      border-bottom: 2px solid var(--gold-color);
+      z-index: 999;
+      padding: 10px 20px;
+    }
+
+    /* Logo */
+    .logo {
+      margin-right: 40px;
+    }
+
+    .logo img {
+      height: 50px; /* Chiều cao logo */
+      width: auto;
+    }
+
+    /* Thanh menu */
+    nav.menu {
+      flex: 1;  /* Để menu dàn đều ngang */
+    }
+
+    .menu ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center; 
+      align-items: center; 
+      gap: 20px; 
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu ul li {
+      position: relative; /* Dùng cho dropdown */
+    }
+
+    .menu ul li a {
+      color: var(--gold-color);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      transition: background-color 0.3s;
+      display: block; /* Cho phép cả khối a được hover */
+    }
+
+    /* Hiệu ứng hover trên item menu */
+    .menu ul li a:hover {
+      background-color: var(--gold-color);
+      color: var(--main-bg-color);
+      border-radius: 4px;
+    }
+
+    /* Menu con (dropdown) */
+    .menu ul li ul {
+      display: none;
+      position: absolute; 
+      top: 100%; 
+      left: 0; 
+      background-color: var(--main-bg-color);
+      border: 1px solid var(--gold-color);
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      min-width: 150px; /* Độ rộng tối thiểu cho menu con */
+    }
+
+    .menu ul li ul li a {
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--gold-color);
+    }
+
+    .menu ul li ul li a:last-child {
+      border-bottom: none;
+    }
+
+    /* Hiển thị menu con khi hover vào menu cha */
+    .menu ul li:hover > ul {
+      display: block;
+    }
+
+    /* Nội dung chính */
+    .content {
+      padding: 20px;
+    }
+
+    .content h1 {
+      margin-bottom: 20px;
+    }
+
+    /* Trang trí khung sản phẩm đồng hồ */
+    .product-card {
+      background-color: #111111;
+      border: 1px solid var(--gold-color);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .product-card img {
+      width: 250px;
+      height: auto;
+      border-right: 1px solid var(--gold-color);
+      border-radius: 8px 0 0 8px;
+    }
+
+    .product-info {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .product-info h3 {
+      color: var(--gold-color);
+      margin-bottom: 10px;
+    }
+
+    .product-info p {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    /* Nút Thêm vào giỏ */
+    .buy-btn {
+      padding: 10px 20px;
+      background-color: var(--gold-color);
+      color: var(--main-bg-color);
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .buy-btn:hover {
+      background-color: #e0c176; /* Màu vàng nhạt hơn khi hover */
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      border-top: 2px solid var(--gold-color);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cột Quảng cáo bên trái -->
+  <div class="left-ad">
+    <h2>Khuyến Mãi</h2>
+    <p>Giảm giá sốc 10% - 20% tất cả các mẫu mới</p>
+    <p>Miễn phí vận chuyển toàn quốc</p>
+    <hr style="border: 1px solid var(--gold-color); margin: 20px 0;" />
+    <h2>Quảng Cáo</h2>
+    <p>Đăng ký ngay để nhận thêm Voucher giảm giá</p>
+    <p>Liên hệ Hotline: 1800-1516</p>
+  </div>
+
+  <!-- Header chứa logo + menu -->
+  <header>
+    <!-- Logo thương hiệu -->
+    <div class="logo">
+      <img src="logo.png" alt="Thương hiệu đồng hồ" />
+    </div>
+    <!-- Menu chính -->
+    <nav class="menu">
+      <ul>
+        <li><a href="Trangchu.html">Trang chủ</a></li>
+        <li>
+          <a href="#">Sản phẩm</a>
+          <ul>
+            <li><a href="ROLEX.html">Rolex</a></li>
+            <li><a href="PATEK.html">Patek Philippe</a></li>
+            <li><a href="CARTIER.html">Cartier</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Chính sách</a>
+          <ul>
+            <li><a href="Chính sách bảo hành.html">Chính sách bảo hành</a></li>
+            <li><a href="Chính sách đổi trả.html">Chính sách đổi trả</a></li>
+            <li><a href="Chính sách trả góp.html">Chính sách trả góp</a></li>
+          </ul>
+        </li>
+        <li><a href="Về chúng tôi.html">Về chúng tôi</a></li>
+        <li><a href="Donhang.html">Giỏ hàng</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Khu vực nội dung chính -->
+  <div class="content">
+ <h1>Chính Sách Trả Góp Tại SmingShop</h1>
+    <p>
+        Để giúp khách hàng dễ dàng tiếp cận với những mẫu đồng hồ đẳng cấp từ các thương hiệu danh tiếng như <strong>Rolex</strong>, <strong>Patek Philippe</strong>, <strong>Cartier</strong> và nhiều hơn nữa, <strong>SmingShop</strong> chính thức triển khai <strong>chính sách trả góp</strong> vô cùng linh hoạt. Nhờ đó, bạn có thể sở hữu chiếc đồng hồ mơ ước mà không phải chi trả toàn bộ số tiền lớn ngay lập tức. Thông qua hình thức trả góp này, chúng tôi mong muốn đem đến giải pháp tài chính tối ưu, giúp tất cả tín đồ thời gian được trải nghiệm đẳng cấp, chất lượng và uy tín với mức chi phí phù hợp.
+    </p>
+
+    <h2>1. Tổng Quan Về Chính Sách Trả Góp</h2>
+    <p>
+        <strong>SmingShop</strong> phối hợp cùng các đơn vị tài chính và ngân hàng uy tín để cung cấp chương trình trả góp tiện lợi, lãi suất ưu đãi. Khách hàng có thể lựa chọn nhiều kỳ hạn linh hoạt như 3 tháng, 6 tháng, 9 tháng hoặc 12 tháng tùy theo điều kiện tài chính cá nhân. Trong một số dịp khuyến mãi đặc biệt, chúng tôi còn áp dụng chương trình trả góp <span class="highlight">0%</span> lãi suất hoặc hỗ trợ một phần lãi suất, mang lại ưu đãi tốt nhất cho người mua.
+    </p>
+
+    <h2>2. Điều Kiện Áp Dụng Trả Góp</h2>
+    <p>
+        Để tham gia chương trình trả góp, quý khách cần đáp ứng một số điều kiện cơ bản sau:
+    </p>
+    <ul>
+        <li>
+            <strong>Độ tuổi:</strong> Từ 18 tuổi trở lên và có đầy đủ năng lực hành vi dân sự.
+        </li>
+        <li>
+            <strong>Giá trị đơn hàng:</strong> Sản phẩm đồng hồ phải đạt mức giá tối thiểu theo quy định của ngân hàng hoặc đối tác tài chính (tùy từng thời điểm và chương trình cụ thể).
+        </li>
+        <li>
+            <strong>Hình thức thanh toán:</strong> Sử dụng thẻ tín dụng (Credit Card) hoặc hồ sơ tín dụng (CMND/CCCD, sổ hộ khẩu, hợp đồng lao động, sao kê lương...) để xét duyệt trả góp. Từng đối tác sẽ có quy trình kiểm duyệt và hạn mức tín dụng khác nhau.
+        </li>
+        <li>
+            <strong>Tài khoản ngân hàng hợp lệ:</strong> Đảm bảo có thẻ tín dụng hoặc tài khoản ngân hàng được đăng ký với các đơn vị liên kết của <strong>SmingShop</strong>.
+        </li>
+    </ul>
+    <p>
+        Nếu có thắc mắc về hạn mức tín dụng hay thủ tục chứng minh thu nhập, quý khách vui lòng liên hệ bộ phận chăm sóc khách hàng để được hỗ trợ chi tiết.
+    </p>
+
+    <h2>3. Các Phương Thức Trả Góp</h2>
+    <p>
+        Tùy theo nhu cầu cá nhân, quý khách có thể lựa chọn một trong các hình thức trả góp sau:
+    </p>
+    <ul>
+        <li>
+            <strong>Trả góp qua thẻ tín dụng:</strong> Đây là phương thức tiện lợi và nhanh chóng nhất. Chỉ cần quẹt thẻ tín dụng của các ngân hàng liên kết tại quầy hoặc thanh toán online, hệ thống sẽ tự động chuyển hóa giao dịch sang trả góp nếu quý khách đăng ký. Một số ngân hàng thường tham gia chương trình này gồm Vietcombank, Techcombank, HSBC, VietinBank, Sacombank...
+        </li>
+        <li>
+            <strong>Trả góp qua công ty tài chính:</strong> Đối với khách hàng chưa có thẻ tín dụng hoặc hạn mức thẻ tín dụng không đủ, quý khách có thể sử dụng dịch vụ trả góp của các công ty tài chính liên kết với <strong>SmingShop</strong>. Phương thức này yêu cầu giấy tờ tùy thân (CMND/CCCD), giấy tờ chứng minh thu nhập (sao kê lương, hợp đồng lao động, hóa đơn điện nước...). Thời gian xét duyệt thường từ 1 – 3 ngày làm việc.
+        </li>
+    </ul>
+
+    <h2>4. Quy Trình Đăng Ký Trả Góp</h2>
+    <p>
+        Để giúp quý khách nắm rõ hơn về cách thức mua đồng hồ trả góp, chúng tôi xin giới thiệu quy trình gồm 5 bước đơn giản:
+    </p>
+    <ul>
+        <li>
+            <strong>Bước 1:</strong> Quý khách chọn mẫu đồng hồ ưng ý tại cửa hàng hoặc trên trang web chính thức của chúng tôi.
+        </li>
+        <li>
+            <strong>Bước 2:</strong> Liên hệ nhân viên tư vấn hoặc bộ phận chăm sóc khách hàng để xác nhận giá trị sản phẩm, lãi suất, kỳ hạn trả góp và điều kiện thanh toán. Nếu mua trực tuyến, quý khách có thể gửi thông tin qua email, hotline hoặc chat trực tiếp.
+        </li>
+        <li>
+            <strong>Bước 3:</strong> Chuẩn bị giấy tờ cần thiết (thẻ tín dụng, CMND/CCCD, hợp đồng lao động hoặc sao kê lương – nếu cần). Nhân viên chúng tôi sẽ hướng dẫn chi tiết về từng hình thức trả góp để quý khách chọn lựa.
+        </li>
+        <li>
+            <strong>Bước 4:</strong> Tiến hành làm thủ tục tại cửa hàng hoặc theo chỉ dẫn trực tuyến. Đối với thẻ tín dụng, quý khách chỉ cần quẹt thẻ và ký xác nhận trả góp. Đối với công ty tài chính, quý khách điền hồ sơ, chờ xét duyệt và thực hiện ký kết hợp đồng.
+        </li>
+        <li>
+            <strong>Bước 5:</strong> Sau khi thành công, quý khách nhận đồng hồ trực tiếp tại cửa hàng hoặc thông qua dịch vụ vận chuyển bảo đảm. Toàn bộ thông tin về thanh toán định kỳ, lãi suất (nếu có) sẽ được cung cấp một cách minh bạch và rõ ràng.
+        </li>
+    </ul>
+
+    <h2>5. Lợi Ích Khi Mua Trả Góp Tại SmingShop</h2>
+    <p>
+        <strong>Shop Đồng Hồ Cao Cấp</strong> thấu hiểu tầm quan trọng của việc sở hữu một chiếc đồng hồ giá trị mà vẫn đảm bảo cân bằng tài chính. Do đó, chúng tôi không ngừng cải tiến, hợp tác với nhiều đối tác uy tín để mang đến trải nghiệm mua trả góp tiện lợi và minh bạch. Dưới đây là những lợi ích nổi bật:
+    </p>
+    <ul>
+        <li><strong>Lãi suất ưu đãi:</strong> Nhiều chương trình 0% hoặc giảm lãi suất hấp dẫn, giúp tối ưu chi phí cho khách hàng.</li>
+        <li><strong>Thủ tục nhanh gọn:</strong> Đội ngũ tư vấn nhiệt tình, hỗ trợ chuẩn bị hồ sơ, rút ngắn thời gian chờ duyệt.</li>
+        <li><strong>Đa dạng kỳ hạn:</strong> Lựa chọn 3 tháng, 6 tháng, 9 tháng hay 12 tháng, phù hợp với khả năng tài chính cá nhân.</li>
+        <li><strong>Hỗ trợ toàn quốc:</strong> Chúng tôi áp dụng trả góp cho khách hàng trên phạm vi toàn quốc, có vận chuyển an toàn kèm bảo hiểm.</li>
+        <li><strong>Chính sách bảo hành, đổi trả rõ ràng:</strong> Ngay cả khi mua trả góp, quý khách vẫn được hưởng đầy đủ quyền lợi bảo hành, đổi trả theo quy định của cửa hàng.</li>
+    </ul>
+
+    <h2>6. Lưu Ý Quan Trọng</h2>
+    <p>
+        – Mỗi ngân hàng hoặc công ty tài chính sẽ có quy định riêng về hạn mức tín dụng, yêu cầu hồ sơ và lãi suất. Quý khách vui lòng tham khảo kỹ thông tin, tránh phát sinh chi phí ngoài ý muốn.
+    </p>
+    <p>
+        – Đối với chương trình trả góp 0%, có thể có phí xử lý giao dịch hoặc phí chuyển đổi trả góp. Phí này tùy thuộc vào chính sách của từng tổ chức tín dụng liên kết.
+    </p>
+    <p>
+        – Quý khách có trách nhiệm thanh toán đúng hạn theo hợp đồng với ngân hàng hoặc công ty tài chính để tránh nợ xấu, phí phạt trả chậm.
+    </p>
+    <p>
+        – Trường hợp hủy trả góp trước hạn hoặc muốn tất toán sớm, quý khách vui lòng kiểm tra điều khoản về phí phạt (nếu có) với đơn vị tài chính đang sử dụng.
+    </p>
+
+  <!-- Kết thúc phần nội dung -->
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Cửa hàng Đồng Hồ Cao Cấp. Mọi quyền được bảo lưu.</p>
+  </footer>
+
+</body>
+</html>
+
+	

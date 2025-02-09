@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cửa hàng Đồng Hồ Cao Cấp</title>
+  <style>
+    :root {
+      --main-bg-color: #000000;   /* Màu nền chủ đạo (đen) */
+      --gold-color: #d4af37;      /* Màu vàng kim */
+      --text-color: #ffffff;      /* Màu chữ trắng */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--main-bg-color);
+      color: var(--text-color);
+      margin-left: 220px;   /* Tạo khoảng trống cho cột quảng cáo bên trái */
+      padding-top: 80px;    /* Tạo khoảng trống phía trên cho phần header cố định */
+    }
+
+    /* Cột quảng cáo bên trái */
+    .left-ad {
+      width: 200px;
+      background-color: #1c1c1c;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      border-right: 2px solid var(--gold-color);
+    }
+
+    .left-ad h2 {
+      color: var(--gold-color);
+      margin-bottom: 10px;
+    }
+
+    .left-ad p {
+      margin-bottom: 15px;
+    }
+
+    /* Header (chứa logo và menu) */
+    header {
+      position: fixed;
+      top: 0;
+      left: 220px;              /* Canh phải so với cột quảng cáo  */
+      right: 0;
+      display: flex;
+      align-items: center;
+      background-color: var(--main-bg-color);
+      border-bottom: 2px solid var(--gold-color);
+      z-index: 999;
+      padding: 10px 20px;
+    }
+
+    /* Logo */
+    .logo {
+      margin-right: 40px;
+    }
+
+    .logo img {
+      height: 50px; /* Chiều cao logo */
+      width: auto;
+    }
+
+    /* Thanh menu */
+    nav.menu {
+      flex: 1;  /* Để menu dàn đều ngang */
+    }
+
+    .menu ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center; 
+      align-items: center; 
+      gap: 20px; 
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu ul li {
+      position: relative; /* Dùng cho dropdown */
+    }
+
+    .menu ul li a {
+      color: var(--gold-color);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      transition: background-color 0.3s;
+      display: block; /* Cho phép cả khối a được hover */
+    }
+
+    /* Hiệu ứng hover trên item menu */
+    .menu ul li a:hover {
+      background-color: var(--gold-color);
+      color: var(--main-bg-color);
+      border-radius: 4px;
+    }
+
+    /* Menu con (dropdown) */
+    .menu ul li ul {
+      display: none;
+      position: absolute; 
+      top: 100%; 
+      left: 0; 
+      background-color: var(--main-bg-color);
+      border: 1px solid var(--gold-color);
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      min-width: 150px; /* Độ rộng tối thiểu cho menu con */
+    }
+
+    .menu ul li ul li a {
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--gold-color);
+    }
+
+    .menu ul li ul li a:last-child {
+      border-bottom: none;
+    }
+
+    /* Hiển thị menu con khi hover vào menu cha */
+    .menu ul li:hover > ul {
+      display: block;
+    }
+
+    /* Nội dung chính */
+    .content {
+      padding: 20px;
+    }
+
+    .content h1 {
+      margin-bottom: 20px;
+    }
+
+    /* Trang trí khung sản phẩm đồng hồ */
+    .product-card {
+      background-color: #111111;
+      border: 1px solid var(--gold-color);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .product-card img {
+      width: 250px;
+      height: auto;
+      border-right: 1px solid var(--gold-color);
+      border-radius: 8px 0 0 8px;
+    }
+
+    .product-info {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .product-info h3 {
+      color: var(--gold-color);
+      margin-bottom: 10px;
+    }
+
+    .product-info p {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    /* Nút Thêm vào giỏ */
+    .buy-btn {
+      padding: 10px 20px;
+      background-color: var(--gold-color);
+      color: var(--main-bg-color);
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .buy-btn:hover {
+      background-color: #e0c176; /* Màu vàng nhạt hơn khi hover */
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      border-top: 2px solid var(--gold-color);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cột Quảng cáo bên trái -->
+  <div class="left-ad">
+    <h2>Khuyến Mãi</h2>
+    <p>Giảm giá sốc 10% - 20% tất cả các mẫu mới</p>
+    <p>Miễn phí vận chuyển toàn quốc</p>
+    <hr style="border: 1px solid var(--gold-color); margin: 20px 0;" />
+    <h2>Quảng Cáo</h2>
+    <p>Đăng ký ngay để nhận thêm Voucher giảm giá</p>
+    <p>Liên hệ Hotline: 1800-1516</p>
+  </div>
+
+  <!-- Header chứa logo + menu -->
+  <header>
+    <!-- Logo thương hiệu -->
+    <div class="logo">
+      <img src="logo.png" alt="Thương hiệu đồng hồ" />
+    </div>
+    <!-- Menu chính -->
+    <nav class="menu">
+      <ul>
+        <li><a href="Trangchu.html">Trang chủ</a></li>
+        <li>
+          <a href="#">Sản phẩm</a>
+          <ul>
+            <li><a href="ROLEX.html">Rolex</a></li>
+            <li><a href="PATEK.html">Patek Philippe</a></li>
+            <li><a href="CARTIER.html">Cartier</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Chính sách</a>
+          <ul>
+            <li><a href="Chính sách bảo hành.html">Chính sách bảo hành</a></li>
+            <li><a href="Chính sách đổi trả.html">Chính sách đổi trả</a></li>
+            <li><a href="Chính sách trả góp.html">Chính sách trả góp</a></li>
+          </ul>
+        </li>
+        <li><a href="Về chúng tôi.html">Về chúng tôi</a></li>
+        <li><a href="Donhang.html">Giỏ hàng</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Khu vực nội dung chính -->
+  <div class="content">
+        <h1>Chính Sách Đổi Trả Tại SmingShop</h1>
+    <p>
+        Tại <strong>SmingShop</strong>, chúng tôi luôn nỗ lực mang đến cho khách hàng trải nghiệm mua sắm tốt nhất với các sản phẩm đồng hồ cao cấp, chính hãng. Bên cạnh việc đảm bảo về chất lượng, nguồn gốc xuất xứ, chúng tôi còn đưa ra những chính sách hỗ trợ sau mua hàng vô cùng minh bạch và tận tâm. Trong đó, <strong>chính sách đổi trả</strong> được thiết lập nhằm giúp quý khách an tâm hơn khi lựa chọn sản phẩm, đồng thời giải quyết nhanh chóng mọi trường hợp không mong muốn phát sinh.
+    </p>
+
+    <h2>1. Thời Hạn Đổi Trả</h2>
+    <p>
+        <strong>SmingShop</strong> hỗ trợ đổi trả sản phẩm trong vòng <span class="highlight">15 ngày</span> kể từ ngày quý khách nhận được đồng hồ. Thời hạn này được tính theo:
+    </p>
+    <ul>
+        <li>Ngày ghi trên biên bản giao nhận hàng (đối với giao hàng trực tiếp).</li>
+        <li>Ngày ghi nhận trên hệ thống của đơn vị vận chuyển (đối với giao hàng qua dịch vụ bưu điện, chuyển phát nhanh hoặc tương đương).</li>
+    </ul>
+    <p>
+        Trong thời gian quy định, nếu sản phẩm gặp phải các vấn đề về lỗi kỹ thuật, sai mẫu mã hoặc không đúng với thông tin mô tả, quý khách hoàn toàn có thể yêu cầu đổi trả. Xin lưu ý, quá thời hạn 7 ngày, chúng tôi sẽ không hỗ trợ đổi trả theo chính sách này, tuy nhiên quý khách vẫn có thể sử dụng <strong>chế độ bảo hành</strong> hoặc các dịch vụ hậu mãi khác nếu lỗi nằm trong phạm vi bảo hành.
+    </p>
+
+    <h2>2. Điều Kiện Đổi Trả</h2>
+    <p>
+        Để quy trình đổi trả được thực hiện nhanh chóng và chính xác, chúng tôi yêu cầu sản phẩm phải đáp ứng những điều kiện sau:
+    </p>
+    <ul>
+        <li>
+            <strong>Tình trạng sản phẩm:</strong> Đồng hồ còn <span class="highlight">nguyên trạng</span> như khi giao cho khách hàng, bao gồm tem niêm phong, nhãn mác, phụ kiện đi kèm (nếu có), không có dấu hiệu đã qua sửa chữa hoặc tự ý tháo lắp.
+        </li>
+        <li>
+            <strong>Chứng từ kèm theo:</strong> Quý khách cần xuất trình hoặc gửi kèm <span class="highlight">hóa đơn mua hàng</span>, <span class="highlight">thẻ bảo hành</span> (nếu có), và tất cả giấy tờ liên quan để chúng tôi xác nhận nguồn gốc sản phẩm.
+        </li>
+        <li>
+            <strong>Hộp đựng, phụ kiện đi kèm:</strong> Sản phẩm phải đi kèm hộp, sách hướng dẫn, thẻ bảo hành quốc tế (nếu là thương hiệu hỗ trợ), cùng các phụ kiện khác mà quý khách nhận được ban đầu.
+        </li>
+        <li>
+            <strong>Lý do đổi trả hợp lệ:</strong> Sản phẩm bị lỗi do nhà sản xuất, giao sai màu, sai mẫu, sai phiên bản hoặc không đúng với thông tin đã được tư vấn. Nếu sản phẩm không bị lỗi mà quý khách muốn đổi do lý do cá nhân (chẳng hạn không phù hợp phong cách), chúng tôi sẽ xem xét trên từng trường hợp cụ thể và có thể tính một khoản phí tái nhập kho.
+        </li>
+    </ul>
+
+    <h2>3. Các Trường Hợp Không Chấp Nhận Đổi Trả</h2>
+    <p>
+        Mặc dù <strong>SmingShop</strong> luôn mong muốn đáp ứng tối đa nhu cầu của khách hàng, vẫn có một số trường hợp chúng tôi không thể hỗ trợ đổi trả:
+    </p>
+    <ul>
+        <li>Sản phẩm bị hư hỏng, trầy xước, biến dạng do lỗi từ phía người dùng (rơi vỡ, va đập mạnh, tiếp xúc với hóa chất độc hại...).</li>
+        <li>Sản phẩm đã quá thời hạn 15 ngày kể từ khi quý khách nhận đồng hồ, trừ trường hợp có thỏa thuận đặc biệt hoặc theo quy định riêng của chương trình khuyến mãi.</li>
+        <li>Sản phẩm không còn nguyên vẹn tem niêm phong, phụ kiện, hộp đựng hoặc đã bị tháo dỡ, can thiệp kỹ thuật không chính thống.</li>
+        <li>Sản phẩm được mua trong các chương trình giảm giá hoặc khuyến mãi đặc biệt với điều kiện “không hỗ trợ đổi trả” (nếu có thông báo rõ ràng từ trước).</li>
+    </ul>
+    <p>
+        Trong các trường hợp trên, quý khách vẫn có thể liên hệ với chúng tôi để được tư vấn dịch vụ bảo hành hoặc sửa chữa (có thể mất phí) tùy theo tình trạng thực tế của đồng hồ.
+    </p>
+
+    <h2>4. Quy Trình Đổi Trả</h2>
+    <p>
+        Để giúp quý khách nhanh chóng thực hiện việc đổi trả, chúng tôi đề ra quy trình đơn giản như sau:
+    </p>
+    <ul>
+        <li>
+            <strong>Liên hệ với đội ngũ chăm sóc khách hàng:</strong> Vui lòng gọi điện, gửi email hoặc nhắn tin qua các kênh hỗ trợ chính thức của <strong>SmingShop</strong> để thông báo về nhu cầu đổi trả. Quý khách cần cung cấp mã đơn hàng, số điện thoại và hình ảnh hoặc video mô tả tình trạng sản phẩm (nếu có lỗi).
+        </li>
+        <li>
+            <strong>Kiểm tra và hướng dẫn:</strong> Sau khi tiếp nhận yêu cầu, bộ phận chăm sóc khách hàng sẽ hướng dẫn cụ thể về địa chỉ nhận lại hàng, phương thức vận chuyển, cũng như các giấy tờ quý khách cần gửi kèm.
+        </li>
+        <li>
+            <strong>Gửi lại sản phẩm:</strong> Quý khách đóng gói đồng hồ cẩn thận, giữ nguyên tem nhãn và gửi về cho chúng tôi thông qua hình thức giao hàng trực tiếp hoặc đơn vị vận chuyển (có bảo hiểm hàng). Vui lòng thông báo mã vận đơn để chúng tôi theo dõi hành trình.
+        </li>
+        <li>
+            <strong>Kiểm định sản phẩm:</strong> Khi nhận được sản phẩm, chúng tôi sẽ tiến hành kiểm tra chi tiết, xác nhận lỗi hoặc kiểm tra điều kiện đổi trả. Quá trình này thường diễn ra từ 1-3 ngày làm việc (không tính ngày nghỉ, lễ).
+        </li>
+        <li>
+            <strong>Phương án đổi trả:</strong> Sau khi xác nhận sản phẩm đủ điều kiện, chúng tôi sẽ thông báo đến quý khách về việc đổi sang mẫu mới, mẫu khác tương đương giá trị hoặc phương án xử lý phù hợp (hoàn tiền một phần hoặc toàn bộ tùy tình huống). Nếu lỗi do nhà sản xuất, chi phí vận chuyển và các chi phí liên quan sẽ do chúng tôi chi trả.
+        </li>
+    </ul>
+
+    <h2>5. Thời Gian Hoàn Tất Đổi Trả Và Hoàn Tiền</h2>
+    <p>
+        Sau khi chúng tôi xác nhận chấp nhận đổi trả, thời gian để quý khách nhận được sản phẩm mới hoặc hoàn tiền (nếu có) thường dao động từ <strong>3 – 7 ngày làm việc</strong>, tùy vào phương thức thanh toán và địa chỉ nhận hàng:
+    </p>
+    <ul>
+        <li>
+            <strong>Đổi sang sản phẩm khác:</strong> Thời gian phụ thuộc vào việc <em>kiểm tra kho</em>, <em>đặt hàng</em> (nếu mẫu quý khách yêu cầu chưa có sẵn), hoặc <em>thời gian vận chuyển</em> (nếu quý khách ở xa).
+        </li>
+        <li>
+            <strong>Hoàn tiền mặt:</strong> Đối với khách hàng thanh toán trực tiếp tại cửa hàng, quý khách có thể nhận lại tiền mặt ngay sau khi hoàn tất thủ tục đổi trả. Đối với thanh toán qua chuyển khoản, chúng tôi sẽ thực hiện chuyển khoản ngược lại vào tài khoản của quý khách trong thời gian sớm nhất.
+        </li>
+        <li>
+            <strong>Hoàn tiền qua cổng thanh toán:</strong> Nếu quý khách thanh toán bằng thẻ tín dụng hoặc các ví điện tử, thời gian xử lý sẽ tùy thuộc vào quy định của ngân hàng hoặc nhà cung cấp dịch vụ ví điện tử. Thông thường sẽ hoàn tất trong vòng 3 – 7 ngày làm việc.
+        </li>
+    </ul>
+
+    <h2>6. Lưu Ý Quan Trọng</h2>
+    <p>
+        – Trong trường hợp sản phẩm không đạt điều kiện đổi trả, chúng tôi sẽ liên hệ với quý khách để thống nhất phương án xử lý. Quý khách có thể yêu cầu trả phí sửa chữa hoặc nhận lại sản phẩm mà không thực hiện đổi trả. Mọi chi phí vận chuyển phát sinh (nếu có) sẽ do quý khách chi trả.
+    </p>
+    <p>
+        – Nếu quá trình kiểm định cho thấy sản phẩm không bị lỗi hoặc hư hỏng do nhà sản xuất, chúng tôi sẽ tư vấn giải pháp khắc phục (thay pin, vệ sinh, bảo dưỡng, đánh bóng...) với mức phí ưu đãi. 
+    </p>
+    <p>
+        – Chúng tôi khuyến khích quý khách quay video quá trình mở hộp (unboxing) và kiểm tra đồng hồ ngay khi nhận để có bằng chứng xác thực trong trường hợp phát hiện hàng lỗi hoặc sai sót về mẫu mã.
+    </p>
+
+    <h2>7. Thông Tin Liên Hệ</h2>
+    <p>
+        Nếu có bất kỳ thắc mắc nào liên quan đến <strong>chính sách đổi trả</strong> hoặc cần được tư vấn giải quyết nhanh chóng, quý khách vui lòng liên hệ:
+    </p>
+    <ul>
+        <li><strong>Hotline:</strong>1800-1516</li>
+        <li><strong>Email:</strong> SmingShop@gmail.com</li>
+    </ul>
+    <p>
+        <strong>SmingShop</strong> rất hân hạnh được phục vụ và đồng hành cùng quý khách trên hành trình khám phá thế giới thời gian đẳng cấp. Chúng tôi tin rằng, với chính sách đổi trả linh hoạt và minh bạch, quý khách sẽ luôn cảm thấy an tâm khi lựa chọn những mẫu đồng hồ xa xỉ, giá trị bền vững tại cửa hàng.
+    </p>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Cửa hàng Đồng Hồ Cao Cấp. Mọi quyền được bảo lưu.</p>
+  </footer>
+
+</body>
+</html>
